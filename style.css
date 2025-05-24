@@ -1,0 +1,23 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    user-select: none;
+}
+@font-face {
+    font-family: beausite-classic-regular;
+    src: url('./Assets/Fonts/beausite.ttf') format('truetype'); 
+}
+@font-face {
+    font-family: beausite-bold;
+    src: url('./Assets/Fonts/beausite-bold.ttf') format('truetype'); 
+}
+@font-face {
+    font-family: beausite-classic-meduim;
+    src: url('./Assets/Fonts/beausite-classic-medium.ttf') format('truetype'); 
+}
+
+
+.landingPage {
+    background-color: #000000;
+}

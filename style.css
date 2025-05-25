@@ -1,9 +1,4 @@
-* {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    user-select: none;
-}
+
 @font-face {
     font-family: beausite-classic-regular;
     src: url('./Assets/Fonts/beausite.ttf') format('truetype'); 
@@ -16,8 +11,171 @@
     font-family: beausite-classic-meduim;
     src: url('./Assets/Fonts/beausite-classic-medium.ttf') format('truetype'); 
 }
-
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; 
+}
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    user-select: none;
+}
 
 .landingPage {
+    display: flex;
+    flex-direction: column;
+    gap: 6.42%;
+    padding-left: 3.125%;
+    padding-right: 3.125%;
     background-color: #000000;
+    font-family: 'beausite-classic-regular', sans-serif;
+    height: auto;
+}
+.container1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 18.32%;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    color: white;
+    font-size: 20px;
+}
+
+.nav-links {
+    color: white;
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links li a {
+    color: grey;
+    text-decoration: none;
+    transition: ease-in-out 0.3s;
+}
+.nav-links li a:hover {
+    color: white;
+}
+
+
+.hamburger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+@media (max-width: 768px) {
+    .nav-links {
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    top: 60px;
+    right: 10px;
+    background: black;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 8px;
+}
+.nav-links.show {
+    display: flex;
+}
+.hamburger {
+    display: block;
+}
+}
+
+.hook {
+    display: flex;
+    justify-content: center;
+    align-items: center;       
+    color: #ffffff;
+    font-size: clamp(1.5rem, 5vw, 3rem);    
+    text-align: center;
+    min-height: 50vh;  
+    transform: scale(1);
+    transform-origin: 0 0;        
+}
+.gallery{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px;
+}
+
+
+.galleryItem{
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden; 
+    max-width: 100%;
+    flex: 1 1 30%; 
+}
+.galleryItem img {
+    transform: scale(1.03);
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: 0.8s ease;
+}
+.galleryItem img:hover {
+    transform: scale(1);
+    filter: brightness(40%); 
+}
+.overlay-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+.galleryItem:hover .overlay-text {
+    opacity: 1;
+}
+.title{
+    font-size: clamp(1.5rem, 5vw, 3rem); 
+    transform: translateY(30%); 
+    transition: transform 0.5s ease-in-out;
+}
+.galleryItem:hover .title {
+    transform: translateY(0);
+    
+}
+.desc{
+    font-size: 15px; 
+    transform: translateY(50%); 
+    transition: transform 0.5s ease-in-out;
+}
+.galleryItem:hover .desc {
+    transform: translateY(0);
+    
+}
+
+@media (max-width: 1200px) {
+    .gallery{
+    grid-template-columns: repeat(2, 1fr); 
+    }
+}
+@media (max-width: 768px) {
+    .gallery{
+    grid-template-columns: 1fr;
+    }
 }

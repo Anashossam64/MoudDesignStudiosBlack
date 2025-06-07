@@ -31,16 +31,20 @@ body{
     box-sizing: border-box;
     user-select: none;
 }
-
+.video-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
 .video-background {
-position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 100vw;
-  height: 100vh;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-  pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+     pointer-events: none;
 }
 
 #container {

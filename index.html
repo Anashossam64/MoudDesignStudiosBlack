@@ -11,7 +11,7 @@
 </head>
 <body>
   <div class="video-container">
-    <video src="Assets/Videos/Moud%206(2).mp4" playsinline="true" webkit-playsinline="true" preload="auto" muted="muted" class="video-background"></video>
+    <video src="Assets/Videos/Moud%206(2).mp4" playsinline="true" muted webkit-playsinline="true" preload="auto" muted="muted" webkit-playsinline class="video-background"></video>
 
 <div id="container"></div>
 <script>
@@ -63,24 +63,24 @@ once(video, "loadedmetadata", () => {
 });
 
 
-setTimeout(function () {
-  if (window["fetch"]) {
-    fetch(src)
-      .then((response) => response.blob())
-      .then((response) => {
-        var blobURL = URL.createObjectURL(response);
+// setTimeout(function () {
+//   if (window["fetch"]) {
+//     fetch(src)
+//       .then((response) => response.blob())
+//       .then((response) => {
+//         var blobURL = URL.createObjectURL(response);
 
-        var t = video.currentTime;
-        once(document.documentElement, "touchstart", function (e) {
-          video.play();
-          video.pause();
-        });
+//         var t = video.currentTime;
+//         once(document.documentElement, "touchstart", function (e) {
+//           video.play();
+//           video.pause();
+//         });
 
-        video.setAttribute("src", blobURL);
-        video.currentTime = t + 0.01;
-      });
-  }
-}, 1000);
+//         video.setAttribute("src", blobURL);
+//         video.currentTime = t + 0.01;
+//       });
+//   }
+// }, 1000);
 </script>
 
   </div>

@@ -36,14 +36,14 @@ body{
     position: fixed;
   top: 50%;
   left: 50%;
-  min-width: 100%;
+  width: auto;
   min-height: 100%;
   transform: translate(-50%, -50%);
   z-index: -10;
 }
 
 #container {
-  height: 1200px;
+  height: 500vh;
 }
 html{
     scroll-behavior: smooth;
@@ -68,6 +68,8 @@ html{
     gap: 100px;
 }
 .navbar {
+    padding-left: 3.125%;
+    padding-right: 3.125%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -76,6 +78,8 @@ html{
     font-size: 20px;
 }
 header{
+    padding-left: 3.125%;
+    padding-right: 3.125%;
     position: sticky;
     top: 0;
     z-index: 1000;

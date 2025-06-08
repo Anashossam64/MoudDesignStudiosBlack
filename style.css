@@ -148,7 +148,7 @@ header{
     min-height: 50vh;  
     transform: scale(1);
     transform-origin: 0 0;    
-    letter-spacing: -2.3px;    
+    letter-spacing: -2.3px; 
 }
 .gallery{
     display: grid;

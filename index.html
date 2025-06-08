@@ -1,199 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>moud</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="./Assets/Logo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="./Assets/Logo.svg" type="image/x-icon" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="./Assets/Libraries/gsap.min.js"></script>
     <script src="./Assets/Libraries/SplitText.min.js"></script>
-</head>
-<body>
-  <div class="video-container">
-    <video class="video-background"
-    src="Assets/Videos/Moud%206(2).mp4"
-    muted
-    playsinline
-    preload="auto"></video>
+  </head>
+  <body>
+    <div class="video-container">
+      <video
+        class="video-background"
+        src="Assets/Videos/Moud%206(2).mp4"
+        muted
+        playsinline
+        preload="auto"
+      ></video>
 
-<div id="container"></div>
-<script>
-      console.clear();
+      <div id="container"></div>
+      <script>
+        console.clear();
 
+        const video = document.querySelector(".video-background");
+        let src = video.currentSrc || video.src;
+        console.log(video, src);
 
-const video = document.querySelector(".video-background");
-let src = video.currentSrc || video.src;
-console.log(video, src);
+        /* Make sure the video is 'activated' on iOS */
+        function once(el, event, fn, opts) {
+          var onceFn = function (e) {
+            el.removeEventListener(event, onceFn);
+            fn.apply(this, arguments);
+          };
+          el.addEventListener(event, onceFn, opts);
+          return onceFn;
+        }
 
-/* Make sure the video is 'activated' on iOS */
-function once(el, event, fn, opts) {
-  var onceFn = function (e) {
-    el.removeEventListener(event, onceFn);
-    fn.apply(this, arguments);
-  };
-  el.addEventListener(event, onceFn, opts);
-  return onceFn;
-}
+        once(document.documentElement, "touchstart", function (e) {
+          video.play();
+          video.pause();
+        });
 
-once(document.documentElement, "touchstart", function (e) {
-  video.play();
-  video.pause();
-});
+        gsap.registerPlugin(ScrollTrigger);
 
+        let tl = gsap.timeline({
+          defaults: { duration: 1 },
+          scrollTrigger: {
+            start: "top top",
+            end: "bottom bottom",
+            scrub: true,
+          },
+        });
 
+        once(video, "loadedmetadata", () => {
+          tl.fromTo(
+            video,
+            {
+              currentTime: 0,
+            },
+            {
+              currentTime: video.duration || 1,
+            }
+          );
+        });
 
-gsap.registerPlugin(ScrollTrigger);
+        // setTimeout(function () {
+        //   if (window["fetch"]) {
+        //     fetch(src)
+        //       .then((response) => response.blob())
+        //       .then((response) => {
+        //         var blobURL = URL.createObjectURL(response);
 
-let tl = gsap.timeline({
-  defaults: { duration: 1 },
-  scrollTrigger: {
-    start: "top top",
-    end: "bottom bottom",
-    scrub: true
-  }
-});
+        //         var t = video.currentTime;
+        //         once(document.documentElement, "touchstart", function (e) {
+        //           video.play();
+        //           video.pause();
+        //         });
 
-once(video, "loadedmetadata", () => {
-  tl.fromTo(
-    video,
-    {
-      currentTime: 0
-    },
-    {
-      currentTime: video.duration || 1
-    }
-  );
-});
-
-
-// setTimeout(function () {
-//   if (window["fetch"]) {
-//     fetch(src)
-//       .then((response) => response.blob())
-//       .then((response) => {
-//         var blobURL = URL.createObjectURL(response);
-
-//         var t = video.currentTime;
-//         once(document.documentElement, "touchstart", function (e) {
-//           video.play();
-//           video.pause();
-//         });
-
-//         video.setAttribute("src", blobURL);
-//         video.currentTime = t + 0.01;
-//       });
-//   }
-// }, 1000);
-</script>
-
-  </div>
-  
-  <header>
-                <nav class="navbar">
-                    <div class="logo">moudesignstudio ©</div>
-                        <ul class="nav-links">
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Bio</a></li>
-                            <li><a href="#">Pricing</a></li>
-                            <li><a href="#">Team</a></li>
-                        </ul>
-                    <div class="hamburger" onclick="toggleMenu()">☰</div>
-                </nav>
-                <script>
-                    function toggleMenu() {
-                    document.querySelector('.nav-links').classList.toggle('show');
-                    }
-                </script>
-            </header>
-    
-        <div class="landingPage" id="glow">
-
-        <div class="container1">
-            
-        
-        <div class="hook">
-           <div>Moud - A creative design studio</div>
-           <div>partner for professionals</div> 
-            <script>
-  gsap.registerPlugin(SplitText, ScrollTrigger);
-
-  // Replace <br> with real divs if needed
-  const hook = document.querySelector(".hook");
-  // hook.innerHTML = hook.innerHTML.replace(/<br\s*\/?>/gi, '</div><div>');
-  // hook.innerHTML = '<div>' + hook.innerHTML + '</div>';
-
-  let split = new SplitText(".hook", {
-    type: "lines",
-    linesClass: "line"
-  });
-
-  gsap.from(split.lines, {
-  y: 20,
-    autoAlpha: 0,
-    stagger: 1,
-    opacity: 0,
-    scrollTrigger: {
-      trigger: ".hook",
-      start: "top 80%", // Adjust as needed (when hook top reaches 80% of viewport)
-      toggleActions: "play none none none",
-    }
-  });
-</script>
-
-        </div>
-        </div>
-
-        <div class="gallery">
-                <div class="galleryItem">
-                    <img src="./Assets/Images/Nourv.png" alt="Nourv">
-                    <div class="overlay-text">
-                        <div class="title">NOURV <BR></div>
-                        <div class="desc">SAUDIA ARABIA - BRAND IDENTITY</div>
-                    </div>
-                </div>
-                <div class="galleryItem">
-                    <img src="./Assets/Images/Fusion.png" alt="Fusion Form">
-                    <div class="overlay-text">
-                        <div class="title">Fusion Form<BR></div>
-                        <div class="desc">EGYPT - BRAND IDENTITY</div>
-                    </div>
-                </div>
-                <div class="galleryItem">
-                    <img src="./Assets/Images/DHYAH.png" alt="DHYAH">
-                    <div class="overlay-text">
-                        <div class="title">DHYAH<BR></div>
-                        <div class="desc">SAUDIA ARABIA - BRAND IDENTITY</div>
-                    </div>
-                </div>
-                <div class="galleryItem">
-                    <img src="./Assets/Images/Elevee.png" alt="Elevee">
-                    <div class="overlay-text">
-                        <div class="title">Elevee<BR></div>
-                        <div class="desc">SAUDIA ARABIA - BRAND IDENTITY</div>
-                    </div>
-                </div>
-                <div class="galleryItem">
-                    <img src="./Assets/Images/coffe.png" alt="coffee">
-                    <div class="overlay-text">
-                        <div class="title">Nova Estrela<BR></div>
-                        <div class="desc">SPAIN - BRAND IDENTITY</div>
-                    </div>
-                </div>
-                <div class="galleryItem">
-                    <img src="./Assets/Images/NXT.png" alt="ABLY">
-                    <div class="overlay-text">
-                        <div class="title">ABLY<BR></div>
-                        <div class="desc">SAUDIA ARABIA - BRAND IDENTITY</div>
-                    </div>
-                </div>  
-        </div>
-        <div id="container"></div>
-
+        //         video.setAttribute("src", blobURL);
+        //         video.currentTime = t + 0.01;
+        //       });
+        //   }
+        // }, 1000);
+      </script>
     </div>
-    
-    
-</body>
+
+    <header>
+      <nav class="navbar">
+        <div class="logo">moudesignstudio ©</div>
+        <ul class="nav-links">
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Bio</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Team</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+      </nav>
+      <script>
+        function toggleMenu() {
+          document.querySelector(".nav-links").classList.toggle("show");
+        }
+      </script>
+    </header>
+
+    <div class="landingPage" id="glow">
+      <div class="container1">
+        <div class="hook">
+          <div>Moud - A creative design studio</div>
+          <div>partner for professionals</div>
+          <script>
+            gsap.registerPlugin(SplitText, ScrollTrigger);
+
+            const hook = document.querySelector(".hook");
+
+            let split = new SplitText(".hook", {
+              type: "lines",
+              linesClass: "line",
+            });
+
+            gsap.from(split.lines, {
+              y: 20,
+              autoAlpha: 0,
+              stagger: 1,
+              opacity: 0,
+              scrollTrigger: {
+                trigger: ".hook",
+                start: "top 80%",
+                toggleActions: "play none none none",
+              },
+            });
+          </script>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <div class="galleryItem">
+          <img src="./Assets/Images/Nourv.png" alt="Nourv" />
+          <div class="overlay-text">
+            <div class="title">NOURV <br /></div>
+            <div class="desc">SAUDIA ARABIA - BRAND IDENTITY</div>
+          </div>
+        </div>
+        <div class="galleryItem">
+          <img src="./Assets/Images/Fusion.png" alt="Fusion Form" />
+          <div class="overlay-text">
+            <div class="title">Fusion Form<br /></div>
+            <div class="desc">EGYPT - BRAND IDENTITY</div>
+          </div>
+        </div>
+        <div class="galleryItem">
+          <img src="./Assets/Images/DHYAH.png" alt="DHYAH" />
+          <div class="overlay-text">
+            <div class="title">DHYAH<br /></div>
+            <div class="desc">SAUDIA ARABIA - BRAND IDENTITY</div>
+          </div>
+        </div>
+        <div class="galleryItem">
+          <img src="./Assets/Images/Elevee.png" alt="Elevee" />
+          <div class="overlay-text">
+            <div class="title">Elevee<br /></div>
+            <div class="desc">SAUDIA ARABIA - BRAND IDENTITY</div>
+          </div>
+        </div>
+        <div class="galleryItem">
+          <img src="./Assets/Images/coffe.png" alt="coffee" />
+          <div class="overlay-text">
+            <div class="title">Nova Estrela<br /></div>
+            <div class="desc">SPAIN - BRAND IDENTITY</div>
+          </div>
+        </div>
+        <div class="galleryItem">
+          <img src="./Assets/Images/NXT.png" alt="ABLY" />
+          <div class="overlay-text">
+            <div class="title">ABLY<br /></div>
+            <div class="desc">SAUDIA ARABIA - BRAND IDENTITY</div>
+          </div>
+        </div>
+      </div>
+      <div id="container"></div>
+    </div>
+  </body>
 </html>
